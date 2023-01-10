@@ -8,9 +8,11 @@ import { Button, OverlayTrigger, Popover } from "react-bootstrap";
 
 function App() {
   const [messages, setMsgs] = useState([
-    { message: "first", sentBy: "Alice", likes: 0 },
-    { message: "second", sentBy: "Bob", likes: 0 },
-    { message: "third", sentBy: "Carol", likes: 0 },
+    { message: "Knock Knock!", sentBy: "Alice", likes: 2 },
+    { message: "Who's there?", sentBy: "Bob", likes: 0 },
+    { message: "Says.", sentBy: "Alice", likes: 0 },
+    { message: "Says who?", sentBy: "Carol", likes: 0 },
+    { message: "Says me, that's who!", sentBy: "Alice", likes: 0 },
   ]);
   const [display, setDisplay] = useState("none");
   const [user, setUser] = useState("");
