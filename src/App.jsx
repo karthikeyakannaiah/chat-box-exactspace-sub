@@ -2,19 +2,23 @@ import { useState } from "react";
 import reactLogo from "./assets/react.svg";
 import "./App.css";
 import info from "../info";
+import EmojiPicker from "emoji-picker-react";
+import { Button, OverlayTrigger, Popover } from "react-bootstrap";
+
+
 function App() {
   const [messages, setMsgs] = useState([
-    { message: "first", sentBy: "random", likes: 0 },
-    { message: "second", sentBy: "random", likes: 0 },
-    { message: "third", sentBy: "random", likes: 0 },
+    { message: "first", sentBy: "Alice", likes: 0 },
+    { message: "second", sentBy: "Bob", likes: 0 },
+    { message: "third", sentBy: "Carol", likes: 0 },
   ]);
   const [display, setDisplay] = useState("none");
   const [user, setUser] = useState("");
   const [msg, setMsg] = useState("");
   const [users, setUsers] = useState([
-    "alice",
-    "bob",
-    "pam",
+    "Alice",
+    "Bob",
+    "Pam",
     "Carol",
     "Dean",
     "Elin",
@@ -22,8 +26,8 @@ function App() {
   let handleSubmit = () => {
     if (msg != "" && user != "") {
       console.log(user);
-      let dup = [...messages];
-      dup.push({ message: msg, sentBy: user, likes: 0 });
+      let dup = [...messages, { message: msg, sentBy: user, likes: 0 }];
+      // dup.push( { message: msg, sentBy: user, likes: 0 });
       setMsgs(dup);
       setMsg("");
       setDisplay("none");
@@ -55,11 +59,24 @@ function App() {
     dup[e.target.name].likes += 1;
     setMsgs(dup);
   };
+  let handleEmoji = (emoji,e) => {
+    let dup = msg + emoji.emoji;
+    setMsg(dup);
+  }
   window.addEventListener("keypress", (e) => {
     if (e.key == "@") {
       setDisplay("flex");
     }
   });
+  const popover = (
+    <Popover id="popover-basic">
+      <Popover.Body>
+        <div>
+          <EmojiPicker onEmojiClick={handleEmoji} />
+        </div>
+      </Popover.Body>
+    </Popover>
+  );
   return (
     <div className="App">
       <div className="sidebar">
@@ -76,7 +93,7 @@ function App() {
                 {v.message}
               </div>
               <div className="msg-box-input">
-                <span>{v.likes}</span>
+                <span>&hearts;{v.likes}</span>
                 <input
                   type="button"
                   value="like"
@@ -100,6 +117,9 @@ function App() {
           </div>
         </div>
         <div className="input-region">
+          <OverlayTrigger trigger="click" placement="top" overlay={popover}>
+            <Button variant="success">emoji</Button>
+          </OverlayTrigger>
           <input
             type="text"
             name="user"

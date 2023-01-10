@@ -45,6 +45,11 @@
   padding: 5px;
   box-sizing: content-box;
 }
+.input-region button {
+  margin: 5px;
+  height: 2em;
+  padding: 5px;
+}
 #user, #message {
   color: whitesmoke;
   background-color: rgb(4, 61, 4);
@@ -90,7 +95,7 @@
 }
 .msg span, .msg-box-input span {
   margin: 5px;
-  font-size: 10px;
+  font-size: 15px;
   color: red;
 }
 .mentions {
